@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>loading_dimensi_wilayah</name>
+    <name>loading_dimensi_waktu</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -427,9 +427,9 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2022/05/31 20:14:13.619</created_date>
+    <created_date>2022/05/31 19:18:14.392</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2022/05/31 20:14:13.619</modified_date>
+    <modified_date>2022/05/31 19:18:14.392</modified_date>
     <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
@@ -500,18 +500,13 @@
   </connection>
   <order>
     <hop>
-      <from>load data</from>
-      <to>Modified JavaScript value</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Modified JavaScript value</from>
+      <from>Microsoft Excel input</from>
       <to>Table output</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>load data</name>
+    <name>Microsoft Excel input</name>
     <type>ExcelInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -537,7 +532,7 @@
     <accept_field/>
     <accept_stepname/>
     <file>
-      <name>${Internal.Entry.Current.Directory}/data_raw/wilayah_komoditas.xlsx</name>
+      <name>${Internal.Entry.Current.Directory}/data_raw/dim_waktu.xlsx</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -545,7 +540,7 @@
     </file>
     <fields>
       <field>
-        <name>ID</name>
+        <name>id</name>
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -557,8 +552,20 @@
         <group/>
       </field>
       <field>
-        <name>NAMA</name>
-        <type>String</type>
+        <name>tahun</name>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>bulan</name>
+        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -571,7 +578,7 @@
     </fields>
     <sheets>
       <sheet>
-        <name>wilayah_komoditas</name>
+        <name>Sheet1</name>
         <startrow>0</startrow>
         <startcol>0</startcol>
       </sheet>
@@ -604,58 +611,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>272</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Modified JavaScript value</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>//Script here
-
-parent_id = null;
-
-if(ID > 0){
-	parent_id = 0;
-}</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>parent_id</name>
-        <rename>parent_id</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>432</xloc>
-      <yloc>224</yloc>
+      <xloc>208</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -672,8 +629,8 @@ if(ID > 0){
     </partitioning>
     <connection>harga_komoditas</connection>
     <schema>dbo</schema>
-    <table>dim_wilayah</table>
-    <commit>1</commit>
+    <table>dim_waktu</table>
+    <commit>1000</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
@@ -689,16 +646,16 @@ if(ID > 0){
     <return_field/>
     <fields>
       <field>
-        <column_name>ID</column_name>
-        <stream_name>ID</stream_name>
+        <column_name>id</column_name>
+        <stream_name>id</stream_name>
       </field>
       <field>
-        <column_name>NAMA</column_name>
-        <stream_name>NAMA</stream_name>
+        <column_name>bulan</column_name>
+        <stream_name>bulan</stream_name>
       </field>
       <field>
-        <column_name>parent_id</column_name>
-        <stream_name>parent_id</stream_name>
+        <column_name>tahun</column_name>
+        <stream_name>tahun</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -710,8 +667,8 @@ if(ID > 0){
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
-      <yloc>224</yloc>
+      <xloc>432</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
